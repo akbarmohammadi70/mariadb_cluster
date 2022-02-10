@@ -1,1 +1,1 @@
-mysql cluster galera with maxscale 
+mariadb cluster galera with maxscale  on ubuntu 20.04
