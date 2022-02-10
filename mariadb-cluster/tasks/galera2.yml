@@ -1,0 +1,15 @@
+---
+- name: galera node2
+  template:
+    src: 50-server.cnf2.j2
+    dest: /etc/mysql/conf.d/galera.cnf
+    mode: 0644
+  
+
+
+- name: stopped mariadb
+  service:
+    name: mariadb
+    state: stopped
+  ignore_errors: yes
+

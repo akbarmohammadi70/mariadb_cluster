@@ -1,0 +1,9 @@
+node1: 192.168.56.103
+node2: 192.168.56.104
+node3: 192.168.56.105
+
+maxscale1: 192.168.56.101
+maxscale2: 192.168.56.102
+
+user_max: akbar
+pass_max: qazwsx

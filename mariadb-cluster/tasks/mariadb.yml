@@ -1,0 +1,76 @@
+---
+
+- name: Installing mariadb and dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+    force: True
+    update_cache: yes
+  loop:
+    - mariadb-server
+    #- python-mysqldb
+    - python3-mysqldb
+    - rsync
+  ignore_errors: yes   
+  
+- name: Change root user password on first run
+  mysql_user: 
+    login_user: root
+    login_password: "{{ root_pass }}"
+    check_implicit_admin: yes
+    name: root
+    password: "{{ root_pass }}"
+    priv: '*.*:ALL,GRANT'
+    host: "{{ item }}"
+  with_items:
+    - "{{ ansible_hostname }}"
+    - 127.0.0.1
+    - ::1
+    - localhost
+  ignore_errors: yes
+  
+- name: delete anonymous MySQL server user for localhost
+  mysql_user: 
+    user: "" 
+    state: "absent"
+    login_user: root 
+    login_password: "{{ root_pass }}"
+    check_implicit_admin: yes
+  ignore_errors: yes
+ 
+- name: remove the MySQL test database
+  mysql_db: 
+    name: test 
+    state: absent
+    login_user: root 
+    login_password: "{{ root_pass }}"
+  ignore_errors: yes
+
+
+- name: creating mysql user (medium_post)
+  mysql_user:
+    login_user: root
+    login_password: "{{ root_pass }}"
+    check_implicit_admin: yes
+    name: "{{ user_db }}"
+    password: "{{ user_db_pass }}"
+    priv: '*.*:ALL'
+    host: '%'
+    state: present 
+  ignore_errors: yes
+
+- name: Enable remote login to mysql
+  lineinfile:
+    path: "/etc/mysql/mariadb.conf.d/50-server.cnf"
+    regexp: '^bind-address'
+    line: 'bind-address = 0.0.0.0'
+  #  backup: yes
+  ignore_errors: yes
+
+  
+- name: stop mysql
+  service:
+    name: mysql
+    state: stopped
+  ignore_errors: yes
+...

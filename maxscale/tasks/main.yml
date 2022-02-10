@@ -1,0 +1,13 @@
+---
+- name: pre requirments install on ubuntu
+  include: requirment.yml
+  when: ansible_os_family == "Debian"
+  
+- name: install maxscale mariadb
+  include: maxscale.yml
+  when: ansible_os_family == "Debian"
+
+- name: Enable service maxscale
+  ansible.builtin.service:
+    name: maxscale
+    enabled: yes

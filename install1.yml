@@ -1,0 +1,6 @@
+---
+- name: install maxscale
+  hosts: 
+    - maxscale
+  roles:
+    - maxscale
