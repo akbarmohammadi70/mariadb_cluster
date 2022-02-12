@@ -7,11 +7,12 @@
 - name: wget
   get_url:
     url: https://downloads.mariadb.com/MaxScale/2.5.0/ubuntu/dists/focal/main/binary-amd64/maxscale-2.5.0-1.ubuntu.focal.x86_64.deb
-    dest: /home/vagrant/
+    dest: /tmp/maxscale-2.5.0-1.ubuntu.focal.x86_64.deb
+    mode: 777
 
 - name: install maxscale
   apt: 
-    deb: /home/vagrant/maxscale-2.5.0-1.ubuntu.focal.x86_64.deb
+    deb: /tmp/maxscale-2.5.0-1.ubuntu.focal.x86_64.deb
 - name: config maxscale
   template: 
     src: maxscale.cnf.j2

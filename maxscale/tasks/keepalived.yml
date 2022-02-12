@@ -1,0 +1,12 @@
+- name: install keepalived
+  apt:
+    name: keepalived
+    state: present
+    force: True
+    update_cache: yes
+
+- name: add template
+  template:
+    src: keepalived.j2
+    dest: /etc/keepalived/keepalived.conf
+

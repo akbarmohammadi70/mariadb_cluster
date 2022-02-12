@@ -8,6 +8,21 @@
   when: ansible_os_family == "Debian"
 
 - name: Enable service maxscale
-  ansible.builtin.service:
+  service:
     name: maxscale
+    enabled: yes
+  
+
+- name: install keepalived
+  include: keepalived.yml
+  when: ansible_os_family == "Debian"
+
+- name: restart keepalived
+  service:
+    name: keepalived
+    state: started
+
+- name: Enable service keepalived
+  service:
+    name: keepalived
     enabled: yes

@@ -1,1 +1,1 @@
-{"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/a/vagrant_cluster/mysql/mariadb-cluster","disabled":false,"__vagrantfile":true}}}
+{"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/a/git_mysql/mariadb_cluster/mariadb-cluster","disabled":false,"__vagrantfile":true}}}
