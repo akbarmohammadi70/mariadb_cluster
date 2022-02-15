@@ -8,7 +8,6 @@
     update_cache: yes
   loop:
     - mariadb-server
-    #- python-mysqldb
     - python3-mysqldb
     - rsync
   ignore_errors: yes   
@@ -64,7 +63,6 @@
     path: "/etc/mysql/mariadb.conf.d/50-server.cnf"
     regexp: '^bind-address'
     line: 'bind-address = 0.0.0.0'
-  #  backup: yes
   ignore_errors: yes
 
   
@@ -73,4 +71,5 @@
     name: mysql
     state: stopped
   ignore_errors: yes
+  notify: Enable mariadb
 ...

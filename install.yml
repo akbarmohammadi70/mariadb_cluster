@@ -4,3 +4,8 @@
     - mariadb
   roles:
     - mariadb-cluster
+- name: install maxscale
+  hosts:
+    - maxscale
+  roles:
+    - maxscale

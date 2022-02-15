@@ -22,7 +22,6 @@
 - name: Iptables rules 22,3306,4567,4568,4444 tcp
   iptables:
     chain: INPUT
-    #source: 
     protocol: tcp
     destination_port: "{{ item }}"
     action: insert
@@ -36,7 +35,6 @@
 - name: Iptables rules 4567 udp
   iptables:
     chain: INPUT
-    #source: 
     protocol: udp
     destination_port: 4567
     action: insert
@@ -66,7 +64,4 @@
   template: 
     src: hosts.j2
     dest: /etc/hosts
-  
-# - name: off
-#   shell: sudo iptables -F
 ...

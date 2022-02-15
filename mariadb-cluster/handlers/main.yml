@@ -1,2 +1,17 @@
 ---
-# handlers file for mariadb-cluster
+- name: Enable mariadb
+  service:
+    name: mariadb
+    enabled: yes
+
+- name: start mariadb node
+  service:
+    name: mariadb
+    state: started
+ 
+
+- name: galera_new_cluster
+  shell: sudo galera_new_cluster
+  delegate_to: db1
+
+

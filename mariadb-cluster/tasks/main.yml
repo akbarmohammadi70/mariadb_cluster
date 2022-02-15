@@ -7,44 +7,24 @@
   include: mariadb.yml
   when: ansible_os_family == "Debian"
 
-- name: node1 galera
+- name: node1 galera 
   include: galera1.yml
   delegate_to: db1
+
+- name: galera_new_cluster node1
+  shell: galera_new_cluster
+  delegate_to: db1
+  notify:
+    - start mariadb node
 
 - name: node2 galera
   include: galera2.yml
   delegate_to: db2
+  notify: start mariadb node
 
 - name: node3
   include: galera3.yml
   delegate_to: db3
-
-- name: galera_new_cluster
-  shell: sudo galera_new_cluster
-  delegate_to: db1
-
-- name: start mariadb db1 nodes
-  service:
-    name: mariadb
-    state: started
-    
-  delegate_to: db1
-
-- name: start mariadb db2 nodes
-  service:
-    name: mariadb
-    state: started
-  delegate_to: db2
- 
-- name: start mariadb db3 nodes
-  service:
-    name: mariadb
-    state: started
-  delegate_to: db3
-
-- name: Enable service mariadb
-  ansible.builtin.service:
-    name: mariadb
-    enabled: yes
+  notify: start mariadb node
 
 ...
