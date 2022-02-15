@@ -1,4 +1,4 @@
-# Roles Name: MariaDB-Galera , Maxscale , keepalive
+# Roles Name: MariaDB-Galera , Maxscale 
 
 Two Ansible Roles that install MariaDB-Galera and Maxscale with keepalive on Ubuntu 20.04 LTS.
 
